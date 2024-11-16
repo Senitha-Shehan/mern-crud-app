@@ -13,14 +13,18 @@ function Nav() {
           </Link>
         </li>
         <li>
-          <h1 className="text-white text-lg hover:text-blue-400 cursor-pointer">
-            Add User
-          </h1>
+          <Link to="/adduser">
+            <h1 className="text-white text-lg hover:text-blue-400 cursor-pointer">
+              ADD User
+            </h1>
+          </Link>
         </li>
         <li>
-          <h1 className="text-white text-lg hover:text-blue-400 cursor-pointer">
-            User Details
-          </h1>
+        <Link to="/userdetails">
+            <h1 className="text-white text-lg hover:text-blue-400 cursor-pointer">
+              User Details
+            </h1>
+          </Link>
         </li>
       </ul>
     </div>

@@ -1,12 +1,20 @@
 import React from "react";
+import { Route, Routes } from "react-router-dom";
 import Home from "./Components/Home/Home";
+import AddUser from "./Components/AddUser/AddUser";
+import UserDetails from "./Components/UserDetails/Users";
 
 function App() {
-  return ( 
+  return (
     <div>
-
-      <Home />
-
+      <React.Fragment>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/mainhome" element={<Home />} />
+          <Route path="/adduser" element={<AddUser />} />
+          <Route path="/userdetails" element={<UserDetails />} />
+        </Routes>
+      </React.Fragment>
     </div>
   );
 }
