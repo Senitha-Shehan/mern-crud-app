@@ -15,7 +15,7 @@ function Nav() {
         <li>
           <Link to="/adduser">
             <h1 className="text-white text-lg hover:text-blue-400 cursor-pointer">
-              ADD User
+              Add User
             </h1>
           </Link>
         </li>

@@ -18,7 +18,6 @@ function Users() {
   return (
     <div>
       <Nav />
-      <h1>User Details Display Page</h1>
       <div>
         {users &&
           users.map((user, i) => (
