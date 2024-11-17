@@ -7,7 +7,8 @@ function User(props) {
     <div>
       <br></br>
       <h1>user Display</h1>
-      <br></br><br></br>
+      <br></br>
+      <br></br>
 
       <h1>ID: {_id}</h1>
       <h1>Name: {name}</h1>
