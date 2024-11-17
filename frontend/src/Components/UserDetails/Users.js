@@ -14,6 +14,7 @@ function Users() {
   useEffect(() => {
     fetchHandler().then((data) => setUsers(data.users));
   }, []);
+  
 
   return (
     <div>
