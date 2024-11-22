@@ -21,7 +21,7 @@ function User(props) {
   return (
     <div className="bg-gray-100 p-6 rounded-lg shadow-md max-w-md mx-auto my-6">
       <h1 className="text-2xl font-bold text-center text-blue-600 mb-4">
-        User Details
+        User Informations
       </h1>
 
       <div className="space-y-2">
