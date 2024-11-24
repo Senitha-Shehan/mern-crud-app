@@ -51,6 +51,18 @@ function Users() {
     });
   };
 
+  const handleSendReport = () => {
+    const phoneNumber = "+94702005088";
+    const message = `Selected User Reports`;
+    const WhatsAppUrl = `https://web.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(
+      message
+    )}`;
+  
+    // Open WhatsApp chat in a new window
+    window.open(WhatsAppUrl, "_blank");
+  };
+  
+
   return (
     <div className="bg-gray-50 min-h-screen">
       <Nav />
@@ -94,6 +106,10 @@ function Users() {
             className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition"
           >
             Download PDF Report
+          </button>
+          <br></br>
+          <button onClick={handleSendReport} className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">
+            Send Report
           </button>
         </div>
       </div>
