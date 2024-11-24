@@ -19,72 +19,83 @@ const fetchHandler = async () => {
 
 function Users() {
   const [users, setUsers] = useState([]);
-  const componentsRef = useRef(); // Ensure a proper ref is created
+  const componentsRef = useRef();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [noResults, setNoResults] = useState(false);
 
   useEffect(() => {
     fetchHandler().then((data) => setUsers(data.users || []));
   }, []);
 
   const handlePrint = useReactToPrint({
-    content: () => componentsRef.current, // Properly reference the DOM node
+    content: () => componentsRef.current,
     documentTitle: "Users List",
     onBeforePrint: () => {
       if (!componentsRef.current) {
-        alert("No content to print!"); // Graceful error handling
-        return false; // Cancel printing
+        alert("No content to print!");
+        return false;
       }
     },
     onAfterPrint: () => alert("PDF Downloaded Successfully!"),
   });
 
+  const handleSearch = () => {
+    fetchHandler().then((data) => {
+      const filteredUsers = data.users.filter((user) =>
+        Object.values(user).some((field) =>
+          field.toString().toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      );
+      setUsers(filteredUsers);
+      setNoResults(filteredUsers.length === 0);
+    });
+  };
+
   return (
-    <div>
+    <div className="bg-gray-50 min-h-screen">
       <Nav />
-      {/* The printable content */}
-      <div
-        ref={componentsRef}
-        style={{
-          padding: "20px",
-          backgroundColor: "#f9f9f9",
-          maxWidth: "800px",
-          margin: "0 auto",
-          border: "1px solid #ccc",
-          borderRadius: "8px",
-        }}
-      >
-        <h1 style={{ textAlign: "center", marginBottom: "20px" }}>User List</h1>
-        {users.length > 0 ? (
-          users.map((user, i) => (
-            <div
-              key={i}
-              style={{
-                borderBottom: "1px solid #ddd",
-                padding: "10px 0",
-              }}
-            >
-              <User user={user} />
-            </div>
-          ))
-        ) : (
-          <p style={{ textAlign: "center" }}>No users found!</p>
+      <div className="max-w-4xl mx-auto p-6">
+        <div className="mb-4">
+          <input
+            onChange={(e) => setSearchQuery(e.target.value)}
+            type="text"
+            name="search"
+            placeholder="Search Users Details"
+            className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-200"
+          />
+          <button
+            onClick={handleSearch}
+            className="mt-2 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition"
+          >
+            Search
+          </button>
+        </div>
+        {noResults && (
+          <p className="text-red-500 text-center">No results found!</p>
         )}
-      </div>
-      {/* Print button */}
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <button
-          onClick={handlePrint}
-          style={{
-            padding: "10px 20px",
-            cursor: "pointer",
-            backgroundColor: "#007bff",
-            color: "#fff",
-            border: "none",
-            borderRadius: "5px",
-            fontSize: "16px",
-          }}
-        >
-          Download PDF Report
-        </button>
+        <div ref={componentsRef} className="bg-white shadow-md rounded-lg p-6">
+          <h1 className="text-center text-2xl font-semibold mb-6">User List</h1>
+          {users.length > 0 ? (
+            users.map((user, i) => (
+              <div
+                key={i}
+                className="border-b border-gray-200 py-4 last:border-none"
+              >
+                <User user={user} />
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No users found!</p>
+          )}
+        </div>
+        <div className="text-center mt-6">
+          <button
+            onClick={handlePrint}
+            className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition"
+          >
+            Download PDF Report
+          </button>
+        </div>
       </div>
     </div>
   );
