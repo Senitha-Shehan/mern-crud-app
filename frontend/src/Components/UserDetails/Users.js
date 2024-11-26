@@ -83,7 +83,7 @@ function Users() {
           </button>
         </div>
         {noResults && (
-          <p className="text-red-500 text-center">No results found!</p>
+          <p className="text-red-500 text-center">No results found in here</p>
         )}
         <div ref={componentsRef} className="bg-white shadow-md rounded-lg p-6">
           <h1 className="text-center text-2xl font-semibold mb-6">User List</h1>
